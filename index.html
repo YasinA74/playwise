@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PlayWise MENA - Roblox Access & Child Protection</title>
+  <meta name="description" content="A plain-language overview of Roblox restrictions in MENA, what concerns were cited, and how safety cooperation can enable responsible access." />
+
+  <style>
+    :root {
+      /* Palette: Modern Slate & Indigo */
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-translucent: rgba(255, 255, 255, 0.85);
+
+      --text-main: #0f172a;  /* Slate 900 */
+      --text-muted: #64748b; /* Slate 500 */
+
+      --brand: #4f46e5;      /* Indigo */
+      --brand-light: #e0e7ff;
+
+      --success: #10b981;    /* Emerald */
+      --success-bg: #d1fae5;
+
+      --danger: #ef4444;     /* Red */
+      --danger-bg: #fee2e2;
+
+      --warning: #f59e0b;    /* Amber */
+      --warning-bg: #fef3c7;
+
+      --border: #e2e8f0;
+      --radius-lg: 24px;
+      --radius-sm: 8px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+      --font-serif: "Merriweather", ui-serif, Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--brand); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    a:hover { color: #4338ca; text-decoration: underline; }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-translucent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 99px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .brand-group { display: flex; align-items: center; gap: 12px; }
+    .brand-logo {
+      width: 32px; height: 32px;
+      background: var(--brand);
+      border-radius: 8px;
+      display: grid; place-items: center;
+      color: white; font-weight: bold; font-family: var(--font-serif);
+    }
+    .brand-text { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+    .brand-sub { display: none; } /* Hidden on mobile */
+
+    @media (min-width: 600px) {
+      .brand-sub { display: inline; color: var(--text-muted); font-weight: 400; font-size: 14px; margin-left: 8px; padding-left: 8px; border-left: 1px solid var(--border); }
+    }
+
+    .meta-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 6px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+    }
+
+    /* Typography */
+    h1, h2, h3 { font-family: var(--font-serif); color: var(--text-main); margin: 0; }
+    h1 { font-size: 32px; line-height: 1.2; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 16px; }
+    h2 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-sans); }
+
+    @media (min-width: 768px) { h1 { font-size: 42px; } }
+
+    p.lead { font-size: 18px; color: var(--text-muted); font-weight: 400; margin: 0 0 24px; line-height: 1.6; }
+    p.text-sm { font-size: 14px; color: var(--text-muted); margin: 0; }
+
+    /* Layout Components */
+    .grid-hero { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+    @media (min-width: 800px) { .grid-hero { grid-template-columns: 2fr 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      height: 100%;
+    }
+
+    .card.highlight {
+      background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(79, 70, 229, 0.1);
+    }
+
+    /* Buttons */
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: var(--text-main);
+      color: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); color: white; text-decoration: none; }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); background: #f8fafc; text-decoration: none; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .btn-ghost:hover { color: var(--brand); text-decoration: none; }
+
+    /* Pills & Status */
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .pill.blocked { background: var(--danger-bg); color: var(--danger); }
+    .pill.ok { background: var(--success-bg); color: #047857; }
+    .pill.limit { background: var(--warning-bg); color: #b45309; }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* Timeline Section */
+    .timeline-grid {
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+    }
+    @media (min-width: 768px) { .timeline-grid { grid-template-columns: 1fr 1fr; } }
+
+    .timeline-group h3 {
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .t-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 24px;
+      border-left: 2px solid var(--border);
+    }
+    .t-item:last-child { margin-bottom: 0; }
+
+    .group-blocked .t-item { border-left-color: var(--danger-bg); }
+    .group-ok .t-item { border-left-color: var(--success-bg); }
+
+    .t-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--text-muted);
+    }
+    .group-blocked .t-item::before { border-color: var(--danger); }
+    .group-ok .t-item::before { border-color: var(--success); }
+
+    .t-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; gap: 10px; flex-wrap: wrap; }
+    .t-country { font-weight: 700; color: var(--text-main); font-size: 15px; }
+    .t-date { font-size: 12px; color: var(--text-muted); font-family: monospace; }
+    .t-desc { font-size: 14px; color: var(--text-muted); margin: 0; }
+
+    /* Checklists */
+    .checklist-grid { display: grid; gap: 20px; }
+    @media(min-width: 700px) { .checklist-grid { grid-template-columns: 1fr 1fr; } }
+
+    .check-card { background: #f8fafc; border-radius: 12px; padding: 20px; border: 1px solid transparent; }
+    .check-card h4 { margin: 0 0 12px; font-size: 15px; font-weight: 700; color: var(--brand); }
+    .check-card ul { margin: 0; padding-left: 20px; }
+    .check-card li { margin-bottom: 8px; font-size: 14px; color: var(--text-muted); }
+    .check-card li::marker { color: var(--brand); }
+
+    /* Added: measurement + conditions cards */
+    .info-grid { display: grid; gap: 20px; }
+    @media(min-width: 700px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+    .info-card{
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .info-card h4{
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      letter-spacing: -0.01em;
+    }
+    .info-card ul{ margin:0; padding-left: 20px; }
+    .info-card li{ margin-bottom: 10px; font-size:14px; color: var(--text-muted); }
+    .info-card li strong{ color: var(--text-main); }
+
+    /* FAQ Details */
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    details[open] { border-color: var(--brand-light); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.05); }
+
+    summary {
+      padding: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-weight: 300;
+      font-size: 20px;
+      color: var(--text-muted);
+    }
+    details[open] summary::after { content: '−'; }
+
+    details p { padding: 0 16px 16px; margin: 0; font-size: 14px; color: var(--text-muted); }
+
+    /* Sources */
+    .source-list { list-style: none; padding: 0; margin: 0; }
+    .source-list li { margin-bottom: 12px; font-size: 13px; color: var(--text-muted); padding-bottom: 12px; border-bottom: 1px dashed var(--border); }
+    .source-list li:last-child { border: none; }
+    .source-list strong { color: var(--text-main); display: block; margin-bottom: 2px; }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--text-main);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-lg);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <header id="top">
+    <div class="brand-group">
+      <div class="brand-logo">P</div>
+      <div>
+        <span class="brand-text">PlayWise MENA</span>
+        <span class="brand-sub">Roblox Access & Protection Brief</span>
+      </div>
+    </div>
+    <div class="meta-tag">Updated Feb 2026</div>
+  </header>
+
+  <div class="grid-hero">
+    <div class="card highlight">
+      <h1>Child protection is the goal. <br>The question is what works.</h1>
+      <p class="lead">
+        Roblox has faced access restrictions in several MENA countries, often citing harassment and safety risks. This page summarizes the main cases and highlights how restrictions were later eased through concrete safety measures.
+      </p>
+
+      <div class="btn-group">
+        <a class="btn btn-primary" href="#mena">MENA Overview</a>
+        <a class="btn btn-secondary" href="#path">Cooperation Checklist</a>
+        <a class="btn btn-secondary" href="#after">If access returns</a>
+        <button class="btn btn-secondary" id="copyShare">Share Summary</button>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
+        <p class="text-sm">
+          <strong>Context:</strong> This is a readable brief with sources.
+          <a href="#" id="flongaTop" style="margin-left:5px">Read the full PlayWise research on Flonga &rarr;</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="card" style="background: #f1f5f9; border:none;">
+      <h3>Quick Takeaways</h3>
+      <ul style="padding-left: 20px; margin: 0; font-size: 14px; color: var(--text-muted); display:flex; flex-direction:column; gap:12px">
+        <li>Restrictions are often followed by attempts to reduce risk surfaces (chat features) and strengthen moderation.</li>
+        <li>Where access was restored, it was typically conditional.</li>
+        <li><strong>PlayWise Focus:</strong> A cooperation path that lifts restrictions responsibly via measurable safety goals.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="mena" style="margin-bottom: 60px;">
+    <h2>MENA Overview: Restrictions & Outcomes</h2>
+    <p class="text-sm" style="margin-bottom: 24px;">Dates reflect public reporting at the time.</p>
+
+    <div class="card">
+      <div class="timeline-grid">
+
+        <div class="timeline-group group-blocked">
+          <h3>Blocked / Restricted</h3>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Egypt</span>
+              <span class="pill blocked"><span class="dot"></span>Blocked</span>
+            </div>
+            <div class="t-date">Feb 4, 2026</div>
+            <p class="t-desc">SCMR announced block citing child safety risks. Roblox indicated openness to talks.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Iraq</span>
+              <span class="pill blocked"><span class="dot"></span>Blocked</span>
+            </div>
+            <div class="t-date">Oct 2025</div>
+            <p class="t-desc">Banned over exploitation and cyber extortion risks.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Qatar</span>
+              <span class="pill blocked"><span class="dot"></span>Blocked</span>
+            </div>
+            <div class="t-date">Aug 2025</div>
+            <p class="t-desc">Inaccessible via web/app; reporting centered on safety.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Oman</span>
+              <span class="pill blocked"><span class="dot"></span>Blocked</span>
+            </div>
+            <div class="t-date">June 2025</div>
+            <p class="t-desc">Regulator action after reports of inappropriate content.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Algeria</span>
+              <span class="pill blocked"><span class="dot"></span>Blocked</span>
+            </div>
+            <div class="t-date">Sep 2025</div>
+            <p class="t-desc">Citing insufficient tools to protect children from scams.</p>
+          </div>
+        </div>
+
+        <div class="timeline-group group-ok">
+          <h3>Restored / Mitigated</h3>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Jordan</span>
+              <span class="pill ok"><span class="dot"></span>Conditional</span>
+            </div>
+            <div class="t-date">Dec 2025</div>
+            <p class="t-desc">Restored with constraints (disabled chat, hidden content).</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Kuwait</span>
+              <span class="pill ok"><span class="dot"></span>Restored</span>
+            </div>
+            <div class="t-date">Nov 2025</div>
+            <p class="t-desc">Restoration after safeguards: no chat, term removal, monitoring.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">UAE</span>
+              <span class="pill ok"><span class="dot"></span>Cooperation</span>
+            </div>
+            <div class="t-date">Nov 2025</div>
+            <p class="t-desc">Focused on "work with platform" approach and Arabic moderation.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Regional</span>
+              <span class="pill limit"><span class="dot"></span>Feature Limits</span>
+            </div>
+            <div class="t-date">Sep 2025</div>
+            <p class="t-desc">Temporary suspension of chat features while engaging regulators.</p>
+          </div>
+
+          <div class="t-item">
+            <div class="t-header">
+              <span class="t-country">Turkey</span>
+              <span class="pill limit"><span class="dot"></span>Unban Possible</span>
+            </div>
+            <div class="t-date">Ongoing</div>
+            <p class="t-desc">Stated that access could return if specific content requirements are met.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="path" style="margin-bottom: 60px;">
+    <h2>Cooperation Checklist</h2>
+    <p class="lead">How restrictions can be lifted responsibly.</p>
+
+    <div class="checklist-grid">
+      <div class="check-card">
+        <h4>A. Safety Controls</h4>
+        <ul>
+          <li><strong>Communication:</strong> Safer defaults, limited discovery, clear minor/adult boundaries.</li>
+          <li><strong>Parental Controls:</strong> Simple setup, Arabic guidance, protection-first defaults.</li>
+          <li><strong>Fraud/Scam:</strong> Better detection and anti-scam education prompts.</li>
+          <li><strong>Reporting:</strong> Fast response targets for child-harm escalation.</li>
+        </ul>
+      </div>
+
+      <div class="check-card" style="background: white; border-color: var(--border);">
+        <h4>B. Credibility & Verification</h4>
+        <ul>
+          <li><strong>Milestones:</strong> Written "fix list" with dates.</li>
+          <li><strong>Verification:</strong> Regulatory review or third-party audits.</li>
+          <li><strong>Transparency:</strong> Periodic reporting on removals and response times.</li>
+          <li><strong>Phased Re-access:</strong> Restore by age group or feature set.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; background: var(--brand-light); color: var(--brand); padding: 16px; border-radius: 12px; font-size: 14px;">
+      <strong>Workable Start:</strong> A time-limited pilot with tightened communication features for minors and verified response-time commitments.
+    </div>
+  </div>
+
+  <div id="after" style="margin-bottom: 60px;">
+    <h2>If access returns, what should the conditions be?</h2>
+    <p class="text-sm" style="margin-bottom: 20px;">
+      When restrictions are eased, outcomes tend to be better when the conditions are specific, measurable, and time-bound.
+      This section is a short “what to include” list that can make any reopening safer and easier to verify.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Recommended conditions</h4>
+        <ul>
+          <li><strong>Safer defaults for minors:</strong> Under-13 and teen accounts start with the safest communication and discovery settings by default.</li>
+          <li><strong>Communication safeguards:</strong> Stronger filters for Arabic, limited contact discovery, and clear boundaries between minors and adults.</li>
+          <li><strong>Faster child-safety reporting:</strong> A dedicated escalation route for child-harm reports with response-time targets.</li>
+          <li><strong>Fraud/scam enforcement:</strong> Quicker takedowns for impersonation, extortion patterns, and scam networks.</li>
+          <li><strong>Review date:</strong> A public check-in date where outcomes are assessed and adjustments are made.</li>
+        </ul>
+      </div>
+
+      <div class="info-card" style="background:#f8fafc;">
+        <h4>Suggested pilot model</h4>
+        <ul>
+          <li><strong>Phase 1 (pilot):</strong> Limited re-access with tighter communication for minors + upgraded moderation capacity.</li>
+          <li><strong>Phase 2 (verify):</strong> Independent review or regulator verification that response targets and enforcement are actually happening.</li>
+          <li><strong>Phase 3 (expand):</strong> Restore broader access only if safety indicators improve and remain stable.</li>
+          <li><strong>Rollback rule:</strong> If severe harm patterns spike and are not addressed, features or access can be tightened again.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; background: #eef2ff; color: #3730a3; padding: 16px; border-radius: 12px; font-size: 14px;">
+      <strong>Why this matters:</strong> clear conditions make it easier for parents, platforms, and regulators to understand what changed and what success looks like.
+    </div>
+  </div>
+
+  <div id="metrics" style="margin-bottom: 60px;">
+    <h2>How to measure safety improvements</h2>
+    <p class="text-sm" style="margin-bottom: 20px;">
+      Safety commitments become meaningful when they can be tracked over time. These are example indicators that fit the main concerns cited in MENA cases.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Operational indicators (platform side)</h4>
+        <ul>
+          <li><strong>Child-safety report response time:</strong> median/average time to act on high-risk reports.</li>
+          <li><strong>Repeat offender action rate:</strong> how often repeat abusers are escalated to stronger actions (restrictions, bans).</li>
+          <li><strong>Scam takedown time:</strong> speed of removing impersonation/scam accounts and associated content.</li>
+          <li><strong>Arabic moderation coverage:</strong> staffing/coverage commitments and evidence of enforcement in Arabic contexts.</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>User-facing indicators (family side)</h4>
+        <ul>
+          <li><strong>Parental controls adoption:</strong> percentage of minor accounts with protection settings enabled by default or through setup prompts.</li>
+          <li><strong>Risk education prompts:</strong> in-app reminders about scams, reporting, and safer communication.</li>
+          <li><strong>Transparency updates:</strong> periodic summaries of top harm categories and enforcement outcomes shared with regulators/public.</li>
+          <li><strong>Complaint trend direction:</strong> whether reports of harassment/scams are trending down after changes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 60px;">
+    <h2>Common Questions</h2>
+    <div style="margin-top: 20px;">
+      <details open>
+        <summary>Why do bans focus on communication features?</summary>
+        <p>Many concerns involve unsafe interactions (grooming, extortion, scams). Restricting communication is a direct way to reduce risk surfaces while broader moderation improvements are implemented.</p>
+      </details>
+      <details>
+        <summary>What does “conditional restoration” look like?</summary>
+        <p>Patterns include disabling chat, tightening filters, and improving monitoring. Access is restored only when specific safety expectations are verified.</p>
+      </details>
+      <details>
+        <summary>Where will the full research live?</summary>
+        <p>On Flonga.org. This page is a summary brief. The full article will include deeper citations and structured proposals.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="card" style="background: #f8fafc; border: none;">
+    <h2>Sources & Verification</h2>
+    <p class="text-sm" style="margin-bottom: 20px;">Public reports used for this brief.</p>
+
+    <ul class="source-list">
+      <li>
+        <strong>Egypt</strong>
+        Ahram Online (<a href="https://english.ahram.org.eg/NewsContent/1/2/561592/Egypt/Society/Egypt-blocks-online-platform-Roblox-over-concerns-.aspx" target="_blank" rel="noopener">Feb 1</a>, <a href="https://english.ahram.org.eg/NewsContent/1/2/561781/Egypt/Society/Egypt-blocks-Roblox-online-gaming-platform-startin.aspx" target="_blank" rel="noopener">Feb 4</a>), Bloomberg (<a href="https://www.bloomberg.com/news/articles/2026-02-04/egypt-moves-to-ban-roblox-gaming-platform-in-online-safety-push" target="_blank" rel="noopener">Feb 4</a>).
+      </li>
+      <li>
+        <strong>Iraq & Qatar</strong>
+        Reuters (<a href="https://www.reuters.com/technology/iraq-bans-us-gaming-platform-roblox-over-child-safety-concerns-2025-10-20/" target="_blank" rel="noopener">Oct 2025</a>), Gulf News (<a href="https://gulfnews.com/world/gulf/qatar/qatar-blocks-popular-online-game-roblox-amid-child-safety-concerns-1.500232420" target="_blank" rel="noopener">Aug 13</a>).
+      </li>
+      <li>
+        <strong>Regional Mitigation</strong>
+        The National (<a href="https://www.thenationalnews.com/news/uae/2025/09/04/uae-clamps-down-on-regulation-of-video-game-roblox/" target="_blank" rel="noopener">Sep 4</a>), Khaleej Times.
+      </li>
+    </ul>
+
+    <div class="btn-group" style="margin-top: 20px;">
+      <a class="btn btn-primary" id="flongaBottom" href="#">Open Full Flonga Article</a>
+      <a class="btn btn-secondary" href="#top">Back to top</a>
+      <button class="btn btn-secondary" id="copyLink">Copy page link</button>
+    </div>
+
+ 
+  </div>
+
+  <footer>
+    <p><strong>PlayWise MENA</strong> - an initiative by <strong>Revivals Egypt</strong>.<br>Designed as a readable brief. Long-form research on Flonga.</p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast">Link copied to clipboard</div>
+
+<script>
+
+  const FLOGNA_ARTICLE_URL = "https://flonga.org/playwise-mena-roblox-access-child-safety";
+
+  document.getElementById("flongaTop").href = FLOGNA_ARTICLE_URL;
+  document.getElementById("flongaBottom").href = FLOGNA_ARTICLE_URL;
+
+  const toast = document.getElementById("toast");
+  let toastTimer;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  document.getElementById("copyShare").addEventListener("click", async () => {
+    const text = `PlayWise MENA - A brief on Roblox restrictions and child-safety cooperation steps.\nRead: ${location.href}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Summary copied!");
+    } catch(e) {
+      showToast("Browser blocked copy. Use address bar.");
+    }
+  });
+
+  document.getElementById("copyLink").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      showToast("Page link copied!");
+    } catch(e) {
+      showToast("Browser blocked copy. Use address bar.");
+    }
+  });
+</script>
+
+</body>
+</html>
